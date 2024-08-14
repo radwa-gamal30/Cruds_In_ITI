@@ -23,17 +23,17 @@
         {{-- /// name --}}
         
         <div class="form-group">
-            <input type="text" class="form-control" id="name" name="name"  placeholder="Enter name">
+            <input type="text" class="form-control" id="name" name="name"  placeholder="Enter name" value="{{old('name',$track->name)}}">
           </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
+          <input type="text" class="form-control" id="location" name="location" placeholder="Enter location" value="{{old('location',$track->location)}}">
 
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="duration" name="duration" placeholder="Enter duration">
+          <input type="text" class="form-control" id="duration" name="duration" placeholder="Enter duration" value="{{old('duration',$track->duration)}}">
         </div>
         <div class="form-group">
-          <input type="file" class="form-control" id="logo" name="logo" placeholder="Enter logo">
+          <input type="file" class="form-control" id="logo" name="logo" placeholder="Enter logo" value="{{old('logo',$track->logo)}}">
         </div>
         
       

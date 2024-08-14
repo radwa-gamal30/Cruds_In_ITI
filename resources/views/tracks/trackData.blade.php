@@ -15,6 +15,7 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">name</th>
+            <th scope="col">logo</th>
             <th scope="col">location</th>
             <th scope="col">duration</th>
             <th scope="col">AC</th>
@@ -25,6 +26,8 @@
         <tr>
             <th scope="row">{{$track->id}}</th>
             <td>{{$track->name}}</td>
+          
+            <td><img src="{{asset('storage/'.$track->logo)}}" style="width:30%; height:auto;"></td>
             <td>{{$track->location}}</td>
             <td>{{$track->duration}}</td>
          
