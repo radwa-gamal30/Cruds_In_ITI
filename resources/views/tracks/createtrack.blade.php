@@ -20,17 +20,17 @@
         @method('POST')
   
         <h1 class="text-center text-info">create track</h1>
-        <div class="form-group">
-            <input type="text" class="form-control" id="name" name="name"  placeholder="Enter name">
+        <div class="form-group py-3">
+            <input type="text" class="form-control" id="name" name="name"  placeholder="Enter name" >
           </div>
-        <div class="form-group">
+        <div class="form-group py-3">
           <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
 
         </div>
-        <div class="form-group">
+        <div class="form-group py-3">
           <input type="text" class="form-control" id="duration" name="duration" placeholder="Enter duration">
         </div>
-        <div class="form-group">
+        <div class="form-group py-3">
           <input type="file" class="form-control" id="logo" name="logo" placeholder="Enter logo">
         </div>
         

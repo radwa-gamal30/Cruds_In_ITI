@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/// students
 Route::get('/students',[student_controller::class,'index'])->name('students.index');
 
 Route::get('/students/create',[student_controller::class,'create'])->name('students.create');
@@ -24,11 +24,19 @@ Route::delete('delete/{id}', [student_controller::class, 'destroy'])->name('stud
 
 Route::get('/students/{id}',[student_controller::class,'viewSingleStudent'])->name('students.viewSingleStudent');
 
-
+//// tracks
 Route::get('/tracks',[track_controller::class,'index'])->name('tracks.index');
-Route::get('/tracks/{id}',[track_controller::class,'trackview'])->name('tracks.trackview');
-Route::delete('/trackDelete/{id}',[track_controller::class,'destroy'])->name('tracks.destroy');
-Route::get('/tracks/{id}/createtrack',[track_controller::class,'createtrack'])->name('tracks.createtrack');
+// 
+// //
+Route::get('/tracks/create',[track_controller::class,'create'])->name('tracks.createtrack');
+// //
 Route::post('/tracks/store',[track_controller::class,'store'])->name('tracks.store');
-Route::get('/tracks/{id}/edit_track',([track_controller::class,'edit_track']))->name('tracks.edit_track');
-Route::put('/tracks/{id}/update_track',([track_controller::class,'update_track']))->name('tracks.update_track');
+// //
+Route::get('/tracks/{id}/edit',([track_controller::class,'edit']))->name('tracks.edit_track');
+// //
+Route::put('/tracks/{id}/update',([track_controller::class,'update']))->name('tracks.update_track');
+// //
+
+Route::delete('delete/{id}',[track_controller::class,'destroy'])->name('tracks.destroy');
+// //
+Route::get('/tracks/{id}',[track_controller::class,'trackview'])->name('tracks.trackview');

@@ -27,7 +27,7 @@
        
         <tr>
           {{-- @dd($student->name); --}}
-            <th scope="row">{{$student->id}}</th>
+            <td >{{$student->id}}</td>
             <td>{{$student->name}}</td>
             <td>{{$student->email}}</td>
             <td>{{$student->grade}}</td>

@@ -24,6 +24,9 @@
           <li class="nav-item">
             <a  class="nav-link active" aria-current="page" href="{{route('tracks.index')}}">Tracks</a>
           </li>
+          <li class="nav-item">
+            <a  class="nav-link active" aria-current="page" href="{{route('tracks.createtrack')}}">add track</a>
+          </li>
           
         </ul>
       </div>
@@ -34,34 +37,38 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">name</th>
+            <th scope="col">logo</th>
             <th scope="col">location</th>
             <th scope="col">duration</th>
             <th scope="col">AC</th>
           </tr>
         </thead>
         <tbody>
-        @foreach ($tracks as $track)
+          @foreach ($tracks as $track)
+          {{-- @dd($track->logo); --}}
         <tr>
-            <th >{{$track->id}}</th>
+            <td >{{$track->id}}</td>
             <td>{{$track->name}}</td>
-            <td><img src="{{$track->logo}}" alt="track-logo" style="width: 30%; height:auto; "></td>
+           
+              <td><img src="{{asset('storage/' . $track->logo)}}" style="width:15%; height:auto;"></td>
+       
 
             <td>{{$track->location}}</td>
             <td>{{$track->duration}}</td>
 
         
             <td class="col">
-              <a href="{{route('tracks.trackview',$track->id)}}"><button class="btn btn-success">view</button></a>
+              <a href="{{route('tracks.trackview',$track->id)}}"><x-button color="success" inside="view"></x-button></a>
               {{-- <a href="{{route('tracks.destroy',$track->id)}}"><button class="btn btn-danger">Delete</button></a> --}}
               <form action="{{ route('tracks.destroy', $track->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
 
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <x-button type="submit" color="danger" inside="delete"></x-button>
             </form>
      
-          <a href="{{route('tracks.createtrack',$track->id)}}"><button class="btn btn-info">create</button></a>
-          <a href="{{route('tracks.edit_track',$track->id)}}"><button class="btn btn-dark">update</button></a>
+          {{-- <a href="{{route('tracks.createtrack',$track->id)}}"><button class="btn btn-info">create</button></a> --}}
+          <a href="{{route('tracks.edit_track',$track->id)}}"><x-button color="dark" inside="update"></x-button></a>
             </td>
             
           </tr>
