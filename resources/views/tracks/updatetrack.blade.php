@@ -20,11 +20,15 @@
     <form class=" border p-2 bordered w-75 m-auto" method="post" action="{{route('tracks.update_track',$track->id)}}">
         @csrf
         @method('PUT')
-        {{-- /// name --}}
-        
+        /// name         
         <div class="form-group">
             <input type="text" class="form-control" id="name" name="name"  placeholder="Enter name" value="{{old('name',$track->name)}}">
           </div>
+          {{-- <select name="track_id">
+            @foreach ($trackNames as $trackName)
+                <option value="{{ $trackName }}">{{ $trackName }}</option>
+            @endforeach
+        </select> --}}
         <div class="form-group">
           <input type="text" class="form-control" id="location" name="location" placeholder="Enter location" value="{{old('location',$track->location)}}">
 

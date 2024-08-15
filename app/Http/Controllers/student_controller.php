@@ -137,11 +137,9 @@ return redirect(route('students.index'));
 
 
 
-public function destroy(Request $request,$id){
-    $student=Students::find($id);
-    $student->delete();
-    
-    return redirect()->route('students.index')->with('status','Student deleted successfully');
+public function destroy($id){
+    $student=Students::findOrFail($id)->delete();
+    return redirect()->route('students.index');
 }
 
 

@@ -25,6 +25,9 @@
             <a class="nav-link" href="{{route('tracks.index')}}">Tracks</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{route('courses.index')}}">courses</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{route('students.create')}}">Create Student</a>
           </li>
           
@@ -58,11 +61,11 @@
             <td><img src="{{asset('storage/'.$student->image)}}" alt="student-img" style="width: 30%; height:auto;"></td>
             <td class="col">
               <a href="{{route('students.viewSingleStudent',$student->id)}}"><x-button color="success" inside="view"></x-button></a>
-              <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
+              {{-- <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <x-button type="submit" color="danger" inside="Delete"></x-button>
-            </form>
+            </form> --}}
             {{-- <a href="{{route('students.create',$student->id)}}"><x-button color="info" inside="create"></x-button></a> --}}
             <a href="{{route('students.edit',$student->id)}}"><x-button color="dark" inside="update"></x-button></a>
 

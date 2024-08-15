@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Track;
 
 
@@ -23,7 +25,7 @@ class track_controller extends Controller
         $validate = $request->validate([
             'name' => 'required|string|max:255|unique:tracks',
             'location' => 'required|string|min:1',
-            'duration' => 'required|numeric|max:255',
+            'duration' => 'required|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ], [
             'name.required' => 'The track name is required.',
@@ -57,16 +59,19 @@ class track_controller extends Controller
 
     function edit($id)
     {
-       $track=Track::findOrFail($id);
-       return view('tracks.updatetrack',compact("track"));
+       
+       $track = Track::findOrFail($id);
+       $trackNames = Track::allNames();
+   
+       return view('tracks.updatetrack', compact('track', 'trackNames'));
     }
 
     function update(Request $request,$id)
     {
-        $validate=$request->validate([
+       $request->validate([
             'name' => 'required|string|max:255|unique:tracks',
             'location' => 'required|string|max:255',
-            'duration' => 'required|numeric|min:1',           
+            'duration' => 'required|string|min:1',           
         'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
 
         ],
@@ -77,9 +82,17 @@ class track_controller extends Controller
        $track=Track::findOrFail($id);
        $updatedtrackData=$request->except('logo');
        if($request->hasFile('logo')){
-        $logoname=time() . '.' . $request->logo->extension();
-        $logopath=$request->file('logo')->storeAs('public/images/logos',$logoname,'public');
-           }
+        $request->validate([
+            'logo' => 'mimes:jpeg,jpg,png,gif|max:2048' 
+        ]);
+        $image = $request->file('logo');
+        $imagename = time() . '.' . $image->extension();
+        $imagePath=$request->file('logo')->storeAs('public/images/logos',$imagename,'public') ;
+               $track->logo = $imagePath; 
+               $updatedtrackData['logo']=$imagePath;
+    } else {
+        $track->logo = 'public/images/logos/default.png';  // Only set this if no file is uploaded
+    }
 
        $track->update($updatedtrackData);
        return to_route('tracks.index');
