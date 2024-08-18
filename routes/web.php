@@ -44,24 +44,27 @@ Route::get('/tracks/{id}',[track_controller::class,'trackview'])->name('tracks.t
 
 
 // courses
-Route::get('/course',[track_controller::class,'index'])->name('courses.index');
+Route::get('/course',[course_controller::class,'index'])->name('courses.index');
 // 
 // //
-Route::get('/course/create',[track_controller::class,'create'])->name('courses.create_course');
+Route::get('/course/create',[course_controller::class,'create'])->name('courses.create_course');
 // //
-Route::post('/course/store',[track_controller::class,'store'])->name('courses.store');
+Route::post('/course/store',[course_controller::class,'store'])->name('courses.store');
 // //
-Route::get('/course/{id}/edit',([track_controller::class,'edit']))->name('courses.edit_course');
+Route::get('/course/{id}/edit',([course_controller::class,'edit']))->name('courses.edit_course');
 // //
-Route::put('/course/{id}/update',([track_controller::class,'update']))->name('courses.update_course');
+Route::put('/course/{id}/update',([course_controller::class,'update']))->name('courses.update_course');
 // //
-Route::get('/course/{id}',[track_controller::class,'show'])->name('courses.show');
+Route::get('/course/{id}',[course_controller::class,'show'])->name('courses.show');
 
+Route::delete('students/{id}',[student_controller::class,'destroy'])->name('students.destroy_student');
 
 
 //////
-Route::delete('delete/{id}',[student_controller::class,'destroy'])->name('students.destroy');
 // //
-Route::delete('delete/{id}',[track_controller::class,'destroy'])->name('tracks.destroy');
+Route::delete('tracks/{id}',[track_controller::class,'destroy'])->name('tracks.destroy_track');
 ///////////
-Route::delete('delete/{id}',[course_controller::class,'destroy'])->name('course.destroy');
+
+
+
+Route::delete('course/{id}',[course_controller::class,'destroy'])->name('courses.destroy_course');

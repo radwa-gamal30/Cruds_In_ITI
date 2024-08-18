@@ -46,29 +46,30 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($courses as $course)
+          @foreach($courses as $course)
           
         <tr>
             <td >{{$course->id}}</td>
             <td>{{$course->name}}</td>
-                  
             <td>
-              @foreach ($course->tracks as $track)
-                {{$track->name}}
-                  @endforeach
-            </td>
+              @foreach($course->tracks as $track)
+              
+              {{ $track->name }}
+              
+              @endforeach</td>
+         
             <td>{{$course->duration}}</td>
 
         
             <td class="col">
               <a href="{{route('courses.show',$course->id)}}"><x-button color="success" inside="view"></x-button></a>
-              <form action="{{ route('courses.destroy', $course->id) }}" method="POST" style="display:inline;">
+              <form action="{{ route('courses.destroy_course', $course->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <x-button type="submit" color="danger" inside="delete"></x-button>
             </form>
      
-          <a href="{{route('courses.edit_course',$track->id)}}"><x-button color="dark" inside="update"></x-button></a>
+          <a href="{{route('courses.edit_course',$course->id)}}"><x-button color="dark" inside="update"></x-button></a>
             </td>
             
           </tr>

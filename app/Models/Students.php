@@ -17,4 +17,7 @@ class Students extends Model
         'address',
     ];
 
+      public function tracks(){
+        return $this->belongsTo(Track::class);
+      } 
 }

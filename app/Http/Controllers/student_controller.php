@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+
 use App\Models\Students;
+use Illuminate\Support\Str;
 
 
 use Illuminate\Http\Request;
@@ -40,29 +43,20 @@ class student_controller extends Controller
                 'grade.numeric' => 'The grade must be a number'
             ]);
       
-            $student=new Students;
-            $student->name = $request->input('name');
-            $student->email = $request->input('email');
-            $student->grade = $request->input('grade');
-            $student->gender = $request->input('gender');
-            $student->address = $request->input('address');
-            $student->image = $request->input('image');
-           
-    
         if($request->hasFile('image')){
             $image = $request->file('image');
     
-            $imagename = time() . '.' . $image->extension();
-    
-            $imagePath = $request->file('image')->storeAS('resources/images', $imagename, 'public');
-    
-            $student->image =$imagePath;
+            $imageOriginalname = pathinfo($image->getClientOriginalName(),PATHINFO_FILENAME);
+            $imageExe=$image->getClientOriginalExtension();
+            $randomString = Str::random(6);
+            $imagesaveas=$imageOriginalname.'_'.$randomString.'.'.$imageExe;
+
+            $imagePath = $request->file('image')->storeAs('/resources/images', $imagesaveas, 'public');
+           $validate['image'] =$imagePath;
         } else {
-            $student->image = '/resources/images/default.png';
+            $validate['image'] = 'resources/images/default.png';
         }
-     
-        $student->save();
-            // @dd($request->all(),$request->file('image'));
+    
         Students::create($validate);
         return redirect(route('students.index'));
      
@@ -101,7 +95,7 @@ public function edit($id){
 public function update(Request $request,$id){
     $validate= $request->validate([
         'name' => 'required|min:2',
-        'email' => 'required|email|max:255|unique:students',
+        'email' => 'required|email|max:255|unique:students,email',
         'grade' => 'required|numeric|min:1|max:100',
         'gender' => 'required',
         'image' => 'required|mimes:jpeg,jpg,png,gif|max:2048',
@@ -114,21 +108,17 @@ public function update(Request $request,$id){
 
 
 $student=Students::findOrFail($id);
-$studentUpdateData=$request->except('image');
-if ($request->hasFile('image')) {
-    // Validate the image
-    $request->validate([
-        'image' => 'mimes:jpeg,jpg,png,gif|max:2048' 
-    ]);
-    $imagename = time() . '.' . $request->image->extension();
-    $imagePath = $request->file('image')->storeAS('resources/images', $imagename, 'public');
 
-    $studentUpdateData['image']=$imagePath;
+if ($request->hasFile('image')) {
+   
+    $imagename = time() . '.' . $request->image->extension();
+    $imagePath = $request->file('image')->storeAs('resources/images', $imagename, 'public');
+
+    $validate['image']=$imagePath;
 
 }
-$student->update($studentUpdateData);
-// dd($studentUpdateData['image']);
-// $student->save();
+$student->update($validate);
+
 return redirect(route('students.index'));
 
 

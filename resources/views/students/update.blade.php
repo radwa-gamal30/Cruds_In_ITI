@@ -10,6 +10,7 @@
 <body>
 
     <h1 class="text-center text-info m-5">Update {{$student->id}}</h1>
+
     <form enctype="multipart/form-data" class=" border p-2 bordered w-75 m-auto" method="post" action="{{route('students.update',$student->id)}}">
         @csrf
         @method('PUT')

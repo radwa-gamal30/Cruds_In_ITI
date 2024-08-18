@@ -13,8 +13,9 @@ class course_controller extends Controller
      */
     public function index()
     {
-        $course=Course::all();
-        return view('courses.course',compact('courses'));    }
+        // $courses = Course::with('tracks')->get();
+        $courses = Course::all();
+             return view('courses.courses',compact('courses'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,8 +30,8 @@ class course_controller extends Controller
      */
     public function store(Request $request)
     {
-        $validate= $request->validate([
-            'name' => 'required|min:2|max:255|course:unique',
+         $request->validate([
+            'name' => 'required|min:2|max:255|course:unique,name',
             'track_id'=>'numeric|required',
             'duration'=>'string|nullable'
         ],[
@@ -44,12 +45,11 @@ class course_controller extends Controller
         $course->track_id = $request->input('track_id');
         $course->duration = $request->input('duration');
 
-        $course = Course::create($request->all());
+        $course->fill($request->all())->save();
+      
         $course->tracks()->sync($request->tracks);
  
-    $course->save();
-        // @dd($request->all(),$request->file('image'));
-    Course::create($validate);
+   
     return redirect(route('courses.index'));
  
 
@@ -95,7 +95,7 @@ class course_controller extends Controller
         
        $course=Course::findOrFail($id);
 
-       $course->update($$request->all());
+       $course->update($request->all());
        $course->tracks()->sync($request->tracks);
        return to_route('courses.index');
     }

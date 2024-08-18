@@ -25,15 +25,15 @@
         <div class="form-group py-3">
             <input type="text" class="form-control" id="name" name="name"  placeholder="Enter name" >
           </div>
-          
-          <div>
-            @foreach ($tracks as $track)
+
+         
+            {{-- @foreach ($course->track_id as $track)
                 <div>
                     <input type="checkbox" name="tracks[]" value="{{ $track->id }}" {{ in_array($track->id, old('tracks', $course->tracks->pluck('id')->toArray())) ? 'checked' : '' }}>
                     {{ $track->name }}
                 </div>
-            @endforeach
-        </div>
+            @endforeach --}}
+       
 
         <div class="form-group py-3">
           <input type="text" class="form-control" id="duration" name="duration" placeholder="Enter duration">
