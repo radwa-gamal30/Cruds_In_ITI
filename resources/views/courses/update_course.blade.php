@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>update track</title>
+    <title>update course</title>
     <style>
         .form-group{
             margin-top:5px;
@@ -27,7 +27,7 @@
         
           
           <div>
-            @foreach ($tracks as $track)
+            @foreach ($Course->tracks as $track)
                 <div>
                     <input type="checkbox" name="tracks[]" value="{{ $track->id }}" {{ in_array($track->id, old('tracks', $course->tracks->pluck('id')->toArray())) ? 'checked' : '' }}>
                     {{ $track->name }}

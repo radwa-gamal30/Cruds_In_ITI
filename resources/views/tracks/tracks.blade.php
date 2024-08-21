@@ -28,7 +28,7 @@
             <a  class="nav-link active" aria-current="page" href="{{route('courses.index')}}">Courses</a>
           </li>
           <li class="nav-item">
-            <a  class="nav-link active" aria-current="page" href="{{route('tracks.createtrack')}}">add track</a>
+            <a  class="nav-link active" aria-current="page" href="{{route('tracks.create_track')}}">add track</a>
           </li>
           
         </ul>
@@ -53,15 +53,17 @@
             <td >{{$track->id}}</td>
             <td>{{$track->name}}</td>
            
-              <td><img src="{{asset('storage/' . $track->logo)}}" style="width:15%; height:auto;"></td>
+              <td>
+                
+                <img src="{{asset('storage/' . $track->logo)}}" style="width:15%; height:auto;"></td>
        
 
-            <td>{{$track->location}}</td>
-            <td>{{$track->duration}}</td>
+              <td>{{$track->location}}</td>
+              <td>{{$track->duration}}</td>
 
         
             <td class="col">
-              <a href="{{route('tracks.trackview',$track->id)}}"><x-button color="success" inside="view"></x-button></a>
+              <a href="{{route('tracks.show',$track->id)}}"><x-button color="success" inside="view"></x-button></a>
               {{-- <a href="{{route('tracks.destroy',$track->id)}}"><button class="btn btn-danger">Delete</button></a> --}}
               <form action="{{ route('tracks.destroy_track', $track->id) }}" method="POST" style="display:inline;">
                 @csrf

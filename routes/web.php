@@ -1,70 +1,70 @@
 <?php
 
-use App\Http\Controllers\course_controller;
-use App\Http\Controllers\student_controller;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\track_controller;
-use App\Models\Students;
+use App\Http\Controllers\api\CoursesController;
+use App\Http\Controllers\api\StudentsController;
+use App\Http\Controllers\api\TracksController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 /// students
-Route::get('/students',[student_controller::class,'index'])->name('students.index');
+Route::get('/students',[StudentsController::class,'index'])->name('students.index');
 // //
-Route::get('/students/create',[student_controller::class,'create'])->name('students.create');
+Route::get('/students/create',[StudentsController::class,'create'])->name('students.create');
 // //
-Route::post('/students/store',[student_controller::class,'store'])->name('students.store');
+Route::post('/students/store',[StudentsController::class,'store'])->name('students.store');
 // //
-Route::get('/students/{id}/edit',([student_controller::class,'edit']))->name('students.edit');
+Route::get('/students/{id}/edit',([StudentsController::class,'edit']))->name('students.edit');
 // //
-Route::Put('/students/{id}/update',([student_controller::class,'update']))->name('students.update');
+Route::Put('/students/{id}/update',([StudentsController::class,'update']))->name('students.update');
 // //
-Route::get('/students/{id}',[student_controller::class,'viewSingleStudent'])->name('students.viewSingleStudent');
+Route::get('/students/{id}',[StudentsController::class,'show'])->name('students.show');
 
 
 
 
 //// tracks
-Route::get('/tracks',[track_controller::class,'index'])->name('tracks.index');
+Route::get('/tracks',[TracksController::class,'index'])->name('tracks.index');
 // 
 // //
-Route::get('/tracks/create',[track_controller::class,'create'])->name('tracks.createtrack');
+Route::get('/tracks/create',[TracksController::class,'create'])->name('tracks.create_track');
 // //
-Route::post('/tracks/store',[track_controller::class,'store'])->name('tracks.store');
+Route::post('/tracks/store',[TracksController::class,'store'])->name('tracks.store');
 // //
-Route::get('/tracks/{id}/edit',([track_controller::class,'edit']))->name('tracks.edit_track');
+Route::get('/tracks/{id}/edit',([TracksController::class,'edit']))->name('tracks.edit_track');
 // //
-Route::put('/tracks/{id}/update',([track_controller::class,'update']))->name('tracks.update_track');
+Route::put('/tracks/{id}/update',([TracksController::class,'update']))->name('tracks.update_track');
 // //
-Route::get('/tracks/{id}',[track_controller::class,'trackview'])->name('tracks.trackview');
+Route::get('/tracks/{id}',[TracksController::class,'show'])->name('tracks.show');
 
 
 
 
 // courses
-Route::get('/course',[course_controller::class,'index'])->name('courses.index');
+Route::get('/courses',[CoursesController::class,'index'])->name('courses.index');
 // 
 // //
-Route::get('/course/create',[course_controller::class,'create'])->name('courses.create_course');
+Route::get('/courses/create',[CoursesController::class,'create'])->name('courses.create_course');
 // //
-Route::post('/course/store',[course_controller::class,'store'])->name('courses.store');
+Route::post('/courses/store',[CoursesController::class,'store'])->name('courses.store');
 // //
-Route::get('/course/{id}/edit',([course_controller::class,'edit']))->name('courses.edit_course');
+Route::get('/courses/{id}/edit',([CoursesController::class,'edit']))->name('courses.edit_course');
 // //
-Route::put('/course/{id}/update',([course_controller::class,'update']))->name('courses.update_course');
+Route::put('/courses/{id}/update',([CoursesController::class,'update']))->name('courses.update_course');
 // //
-Route::get('/course/{id}',[course_controller::class,'show'])->name('courses.show');
+Route::get('/courses/{id}',[CoursesController::class,'show'])->name('courses.show');
 
-Route::delete('students/{id}',[student_controller::class,'destroy'])->name('students.destroy_student');
 
 
 //////
+Route::delete('students/{id}',[StudentsController::class,'destroy'])->name('students.destroy_student');
+
 // //
-Route::delete('tracks/{id}',[track_controller::class,'destroy'])->name('tracks.destroy_track');
+Route::delete('tracks/{id}',[TracksController::class,'destroy'])->name('tracks.destroy_track');
+
 ///////////
 
-
-
-Route::delete('course/{id}',[course_controller::class,'destroy'])->name('courses.destroy_course');
+Route::delete('courses/{id}',[CoursesController::class,'destroy'])->name('courses.destroy_course');

@@ -12,14 +12,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>create course</title>
+    <title>add course</title>
 </head>
 <body class="">
     <form enctype="multipart/form-data" method="POST" action="{{route('courses.store')}}" class="bg-dark " style="margin-left:370px;margin-right:200px; margin-top:50px; padding:50px; width:50vw; height:85vh;">
         @csrf
         @method('POST')
-  
-        <h1 class="text-center text-info">create course</h1>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+        <h1 class="text-center text-info">Add course</h1>
         
         
         <div class="form-group py-3">
@@ -27,12 +35,15 @@
           </div>
 
          
-            {{-- @foreach ($course->track_id as $track)
-                <div>
-                    <input type="checkbox" name="tracks[]" value="{{ $track->id }}" {{ in_array($track->id, old('tracks', $course->tracks->pluck('id')->toArray())) ? 'checked' : '' }}>
-                    {{ $track->name }}
-                </div>
-            @endforeach --}}
+          <div class="form-group py-3">
+            <label for="track_id">Choose Track:</label>
+            <select name="track_id" id="track_id" class="form-control">
+                <option value="" selected disabled>Choose Track...</option>
+                @foreach ($tracks as $track)
+                    <option value="{{ $track->id }}">{{ $track->name }}</option>
+                @endforeach
+            </select>
+        </div>
        
 
         <div class="form-group py-3">

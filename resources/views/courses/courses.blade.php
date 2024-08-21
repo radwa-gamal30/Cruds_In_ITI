@@ -51,13 +51,9 @@
         <tr>
             <td >{{$course->id}}</td>
             <td>{{$course->name}}</td>
-            <td>
-              @foreach($course->tracks as $track)
-              
-              {{ $track->name }}
-              
-              @endforeach</td>
-         
+           <td> @foreach ($course->tracks as $track)
+            {{ $track->name }}
+        @endforeach</td>
             <td>{{$course->duration}}</td>
 
         

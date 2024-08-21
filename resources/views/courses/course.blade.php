@@ -24,7 +24,6 @@
         <tbody>
        
         <tr>
-       
             {{-- <td >{{$course->id}}</td>
             <td>{{$course->name}}</td>
             <td>

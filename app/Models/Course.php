@@ -8,18 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'name',
-        'track_id',
-        'track_name',
-        'starts_at',
-        'ends_at',
-        'duration'
-
+        'location',
+        'duration',
+        'logo'
     ];
 
-
-    public function tracks(){
-        return $this->belongsToMany(Track::class);
-    }
 }
