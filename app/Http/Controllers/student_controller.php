@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Log;
 use Illuminate\Container\Attributes\Log as AttributesLog;
 
-class StudentsController extends Controller
+class student_controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,6 +37,9 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
+
+        
          $request->validate([
             'name' => 'required|min:2',
             'email' => 'required|email|max:255|unique:students',
@@ -53,7 +56,6 @@ class StudentsController extends Controller
 
         }
         
-    
         Student::create([
             'name'=>request()->input('name'),
             'email'=>request()->input('email'),
@@ -63,8 +65,6 @@ class StudentsController extends Controller
             'track_id'=>request()->input('track_id'),
             'address'=>request()->input('address'),
         ]);
-
-        dd(Student::all());
 
         return redirect()->route('students.index');
     }

@@ -7,7 +7,7 @@ use App\Models\Course;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CoursesController extends Controller
+class course_controller extends Controller
 {
     /**
      * Display a listing of the resource.

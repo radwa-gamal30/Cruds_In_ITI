@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Track;
 use Illuminate\Http\Request;
 
-class TracksController extends Controller
+class track_controller extends Controller
 {
     /**
      * Display a listing of the resource.
